@@ -1,0 +1,26 @@
+spring:
+  data:
+    mongodb:
+      username: admin
+      password: admin
+      host: localhost  # or mongodb (docker-compose service name)
+      port: 27017
+      database: order
+      authentication-database: admin
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.type.mapping: orderConfirmation:com.shank.ecommerce.kafka.OrderConfirmation
+
+server:
+  port: 8084
+
+application:
+  config:
+    customer-url: http://localhost:8222/api/v1/customers
+    payment-url: http://localhost:8222/api/v1/payments
+    product-url: http://localhost:8222/api/v1/products
